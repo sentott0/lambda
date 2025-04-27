@@ -40,3 +40,26 @@
     "body": "{\"eventId\":\"0e3d719d-8c15-4539-a865-cd14ed99865f\",\"title\":\"Reguler\",\"desc\":\"This is a regular ticket. You cannot choose your seat.\",\"price\":800,\"stock\":1500}"
   }
   
+  #rekog
+
+  {
+    "httpMethod": "POST"
+  }
+
+  
+  {
+    "httpMethod": "GET",
+    "queryStringParameters": {
+      "token": "AbCdEfGh123456..."  // ganti dengan token hasil POST
+    }
+  }
+
+  
+  "s3": {
+  "bucket": {
+    "name": "tecnoinput"
+  },
+  "object": {
+    "key": "uploads/myimage.jpg" // img path
+  }
+}
