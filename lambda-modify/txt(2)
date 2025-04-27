@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd front-end
+        - echo "Installing dependencies..."
+        - npm install
+    build:
+      commands:
+        - echo "Building the Vue.js app..."
+        - npm run build
+  artifacts:
+    # Karena kita masuk ke folder front-end di preBuild, output build biasanya berada di "dist" di dalam folder front-end.
+    # Namun, karena file amplify.yml berada di root, baseDirectory harus disesuaikan dengan path relatif ke root.
+    baseDirectory: front-end/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - front-end/node_modules/**/*

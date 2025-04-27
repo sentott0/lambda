@@ -1,0 +1,42 @@
+//Generate Token
+{
+    "body": "{\"deviceId\": \"device-1234\", \"expired\": 7}"
+  }
+  
+//Post Event
+{
+    "httpMethod": "POST",
+    "path": "/event",
+    "headers": {
+      "Authorization": "YOUR_TOKEN",
+      "Deviceid": "YOUR_DEVICE_ID",
+      "Content-Type": "application/json"
+    },
+    "body": "{\"title\":\"Elevation Worship Show\",\"desc\":\"Come and worship together!\",\"category\":\"ChristiansMusic\",\"location\":\"Washinton DC\",\"image\":\"https://images.tokopedia.net/blog-tokopedia-com/uploads/2023/05/ONE-OK-ROCK.jpg\",\"date\":\"2025-05-12\",\"publish\":true}"
+  }
+
+//Delete event
+{
+    "httpMethod": "DELETE",
+    "path": "/event/12345",
+    "pathParameters": {
+      "id": "12345"
+    },
+    "headers": {
+      "Authorization": "YOUR_TOKEN",
+      "Deviceid": "YOUR_DEVICE_ID"
+    }
+  }
+  
+//Post Ticket
+{
+    "httpMethod": "POST",
+    "path": "/ticket",
+    "headers": {
+      "Authorization": "7b92260ae46a6660a8a7a0571c2f255b",
+      "Deviceid": "device-001",
+      "Content-Type": "application/json"
+    },
+    "body": "{\"eventId\":\"0e3d719d-8c15-4539-a865-cd14ed99865f\",\"title\":\"Reguler\",\"desc\":\"This is a regular ticket. You cannot choose your seat.\",\"price\":800,\"stock\":1500}"
+  }
+  

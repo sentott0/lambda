@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask
+          image: 578033159601.dkr.ecr.us-east-1.amazonaws.com/lks-ecr-imannuel:63f7a93d48c0c094621baea1aed1bd18886858de
+          ports:
+            - containerPort: 5000
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: AWS_ACCESS_KEY_ID
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: AWS_SECRET_ACCESS_KEY
+
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: AWS_SESSION_TOKEN
+
+            - name: AWS_REGION
+              value: "us-east-1"
+
+            - name: API_GATEWAY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: API_URL
+            
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: S3_BUCKET
+
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: DB_HOST
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: DB_PASSWORD
+
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: pod-secret
+                  key: DB_DATABASE
+
+          
+
+           
+
+           
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
